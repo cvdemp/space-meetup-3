@@ -83,13 +83,16 @@ post '/:id' do
   id = params["id"]
   meetup = Meetup.find(id)
   attendees = Attendee.where(meetup_id: id)
+  new_attendee = Attendee.new(meetup_id: meetup.id, user_id: current_user.id, owner: false)
 
   if signed_in?
-    attendees.uniq!.each do |attendee|
-      unless attendee.owner
+    attendees.each do |attendee|
+      if Attendee.where(meetup_id: meetup.id, user_id: current_user.id, owner: false).first == nil
       flash[:notice] = "You're in!"
-        Attendee.create(meetup_id: meetup.id, user_id: current_user.id, owner: false)
+      new_attendee.save
         redirect "/#{meetup.id}"
+      else
+        flash[:notice] = "You are already signed up!"
       end
     end
   else

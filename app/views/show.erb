@@ -10,9 +10,7 @@
 <div>Location: <%= meetup.location %></div>
 <div>Attendees: </br>
                 <% attendees.each do |attendee| %>
-                <% unless attendee == current_user %>
-                    <%= User.find(attendee.user_id).username %> </br>
-                  <% end %>
+                  <%= User.find(attendee.user_id).username %> </br>
                 <% end %>
 </div>
 <div>
