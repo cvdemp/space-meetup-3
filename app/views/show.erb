@@ -1,0 +1,22 @@
+
+<h1><%= meetup.title %></h1>
+<div>Created By: <% attendees.each do |attendee| %>
+                   <% if attendee.owner %>
+                     <%= User.find(attendee.user_id).username %>
+                     <% end %>
+                   <% end %>
+</div>
+<div>Description: <%= meetup.description %></div>
+<div>Location: <%= meetup.location %></div>
+<div>Attendees: </br>
+                <% attendees.each do |attendee| %>
+                <% unless attendee == current_user %>
+                    <%= User.find(attendee.user_id).username %> </br>
+                  <% end %>
+                <% end %>
+</div>
+<div>
+  <form action="/<%= meetup.id %>" method="post">
+  <input type="submit" value= "join meetup">
+  </form>
+</div>

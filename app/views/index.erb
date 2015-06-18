@@ -1,0 +1,25 @@
+<h1><%= @title %></h1>
+<% meetups.each do |meetup| %>
+    <div><a href="/<%= meetup.id %>"><%=meetup.title%></a></div>
+  <%end%>
+
+  <form action="/" method="post">
+    <p>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+    </p>
+
+    <p>
+      <label for="description">Description:</label>
+      <textarea type="url" id="description" name="description" required></textarea>
+    </p>
+
+    <p>
+      <label for="location">Location:</label>
+      <input id="location" name="location" required>
+    </p>
+
+    <p>
+      <input type="submit">
+    </p>
+  </form>
